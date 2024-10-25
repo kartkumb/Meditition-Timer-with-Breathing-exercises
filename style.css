@@ -1,0 +1,35 @@
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #e3f6f5;
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      font-size: 2em;
+      color: #027373;
+    }
+    #timer {
+      font-size: 3em;
+      margin: 10px;
+      color: #046582;
+    }
+    #breathing {
+      font-size: 1.5em;
+      color: #036666;
+    }
+    #startButton {
+      padding: 10px 20px;
+      font-size: 1.2em;
+      color: #fff;
+      background-color: #028090;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    #startButton:hover {
+      background-color: #046582;
+    }
