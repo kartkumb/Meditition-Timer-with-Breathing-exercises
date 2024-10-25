@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meditation Timer</title>
+  <link >
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #e3f6f5;
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      font-size: 2em;
+      color: #027373;
+    }
+    #timer {
+      font-size: 3em;
+      margin: 10px;
+      color: #046582;
+    }
+    #breathing {
+      font-size: 1.5em;
+      color: #036666;
+    }
+    #startButton {
+      padding: 10px 20px;
+      font-size: 1.2em;
+      color: #fff;
+      background-color: #028090;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    #startButton:hover {
+      background-color: #046582;
+    }
+  </style>
+</head>
+<body>
+  <h1>Meditation Timer</h1>
+  <div id="timer">1:00</div>
+  <div id="breathing">Get Ready...</div>
+  <button id="startButton">Start</button>
+
+  <script>
+    let timerElement = document.getElementById("timer");
+    let breathingElement = document.getElementById("breathing");
+    let startButton = document.getElementById("startButton");
+
+    let meditationTime = 60; // Total time in seconds
+    let breathCycleTime = 4; // Time for each inhale or exhale
+    let intervalId;
+
+    function startMeditation() {
+      let timeLeft = meditationTime;
+      let isBreathingIn = true;
+      let cycleTimeLeft = breathCycleTime;
+
+      startButton.disabled = true;
+      startButton.innerText = "Relax";
+
+      intervalId = setInterval(() => {
+        // Update the main timer
+        let minutes = Math.floor(timeLeft / 60);
+        let seconds = timeLeft % 60;
+        timerElement.textContent = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+        timeLeft--;
+
+        // Update breathing cycle text
+        breathingElement.textContent = isBreathingIn ? "Breathe In..." : "Breathe Out...";
+        cycleTimeLeft--;
+
+        if (cycleTimeLeft <= 0) {
+          isBreathingIn = !isBreathingIn; // Switch between inhale and exhale
+          cycleTimeLeft = breathCycleTime; // Reset cycle time
+        }
+
+        // End meditation when time runs out
+        if (timeLeft < 0) {
+          clearInterval(intervalId);
+          breathingElement.textContent = "Session Complete!";
+          startButton.disabled = false;
+          startButton.innerText = "Start";
+        }
+      }, 1000);
+    }
+
+    startButton.addEventListener("click", startMeditation);
+  </script>
+</body>
+</html>
